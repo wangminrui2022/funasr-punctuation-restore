@@ -16,17 +16,21 @@
 - ✅ 下载失败时自动弹出超友好手动下载指南
 - ✅ 跨平台（Windows/Linux/macOS）
 
-## 🚀 快速安装 & 使用
+### **在 OpenClaw 聊天中**
+
+你可以直接对你的 Agent 说：
+
+请使用 funasr-punctuation-restore 技能，将 "F:\命理学-音频-干声-文本\猴哥说易\月支月令如何看一个人事业！_20260322_131438.txt" 文本恢复标点符号。
+
+请使用 funasr-punctuation-restore 技能，将 "F:/命理学-音频-干声-文本" 目录下的所有.txt文本恢复标点符号。
+
+## **🚀 快速安装 & 使用**
 
 ```bash
-# 1. 克隆到 OpenClaw 技能目录
-git clone https://github.com/你的用户名/funasr-punctuation-restore.git ~/.openclaw/skills/funasr-punctuation-restore
+# 1. 使用普通方式安装到 OpenClaw 技能目录
+安装 funasr-punctuation-restore 技能
 
-# 2. 进入目录并安装依赖
-cd ~/.openclaw/skills/funasr-punctuation-restore
-pip install funasr modelscope torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu121
-
-# 3. 测试三种模式
+# 2. 测试三种模式
 python scripts/punctuation_restore.py --text "测试文本恢复标点"
-python scripts/punctuation_restore.py --file "D:\test.txt"
-python scripts/punctuation_restore.py --dir "D:\我的笔记"   # ← 推荐！
+python scripts/punctuation_restore.py --file "F:\命理学-音频-干声-文本\猴哥说易\月支月令如何看一个人事业！_20260322_131438.txt"
+python scripts/punctuation_restore.py --dir "F:\命理学-音频-干声-文本"

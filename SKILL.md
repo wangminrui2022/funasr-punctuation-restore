@@ -1,22 +1,25 @@
 ---
-name: funasr-punctuation-restore
-version: 1.5.1
-description: 使用 FunASR ct-punc 模型一键恢复标点（支持文本/文件/目录）。目录模式会在同级创建结构完全一致的 _punctuated 镜像目录（原目录不变）。GPU 加速 + 自动清理显存 + 下载失败美观提示。
-author: lao
-category: text-processing
-tags: [funasr, punctuation, gpu, 目录镜像, 标点恢复, modelscope]
+name: Funasr-Punctuation-Restore
+description: |-
+  使用 FunASR 官方 ct-punc 模型，为**一段文本、单个记事本文件、或整个目录**一键恢复标点符号。
+metadata:
+  openclaw:
+    requires:
+      bins:
+        - python
 ---
 
-# FunASR 标点恢复技能（v1.5.1 最终版）
+# Funasr-Punctuation-Restore
 
-## 🎯 何时触发本技能
-用户提到以下任意情况时立即调用：
-- “帮我给这段文字恢复标点”“加标点：xxx”
-- “把这个记事本文件恢复标点” + 文件路径
-- “把这个文件夹所有记事本文件都恢复标点” + 目录路径
+**功能**：使用 FunASR ct-punc 模型一键恢复标点（支持文本/文件/目录）。目录模式会在同级创建结构完全一致的 _punctuated 镜像目录（原目录不变）。GPU 加速 + 自动清理显存。
 
-## 📋 执行步骤（Agent 必须严格执行）
+## 支持的模型（推荐顺序）
+1. **punc_ct-transformer_cn-en-common-vocab471067-large** → 这是一个基于 Transformer 的中英文混合文本标点恢复模型，用于给 ASR 结果自动加标点。
 
-1. **进入技能目录**
+## 执行步骤
+1. **解析目录**：识别用户的源路径（支持单个音频文件或整个文件夹）。
+2. **默认目标**：若未指定输出路径，默认在输入同级创建 `[原文件名]_punctuated.txt`或[原文件名]_punctuated 文件或目录。
+3. **调用命令**：使用以下兼容性命令启动脚本（优先 python3，失败则 python）。脚本会自动创建虚拟环境、检测 GPU 并安装对应版本。
+
    ```bash
-   cd ~/.openclaw/skills/funasr-punctuation-restore
+   (python3 scripts/punctuation_restore.py (--text "<文本内容>" | --file "<文件路径>" | --dir "<目录路径>")) || (python scripts/punctuation_restore.py (--text "<文本内容>" | --file "<文件路径>" | --dir "<目录路径>"))
